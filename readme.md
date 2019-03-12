@@ -13,3 +13,6 @@ php 7.1.x
 
 5. Run ```php artisan serve```
 
+
+API Documentation can be found <a href="https://documenter.getpostman.com/view/1242766/S17jWs4R">here</a>
+
