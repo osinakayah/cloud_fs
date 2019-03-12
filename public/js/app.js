@@ -82188,14 +82188,6 @@ var Widget02 = function (_Component) {
             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
               __WEBPACK_IMPORTED_MODULE_2_reactstrap__["b" /* Button */],
               { onClick: function onClick() {
-                  toggleRenameModal(link);
-                }, className: 'font-weight-bold font-xs btn-block text-muted' },
-              'Rename',
-              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('i', { className: 'fa fa-pencil float-right font-lg' })
-            ),
-            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-              __WEBPACK_IMPORTED_MODULE_2_reactstrap__["b" /* Button */],
-              { onClick: function onClick() {
                   return openFolder(link);
                 }, className: 'font-weight-bold font-xs btn-block text-muted' },
               'Open Folder',

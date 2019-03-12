@@ -60,8 +60,6 @@ class Widget02 extends Component {
       }else {
           return (
               <CardFooter className="px-3 py-2">
-                <Button onClick={() => {toggleRenameModal(link)}} className="font-weight-bold font-xs btn-block text-muted">Rename
-                  <i className="fa fa-pencil float-right font-lg"></i></Button>
                 <Button onClick={() => openFolder(link)} className="font-weight-bold font-xs btn-block text-muted">Open Folder
                   <i className="fa fa-folder-open float-right font-lg"></i></Button>
                 <Button onClick={()=>{toggleDeleteModal(link)}} className="font-weight-bold font-xs btn-block text-muted">Delete
