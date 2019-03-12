@@ -10,9 +10,10 @@ class Login extends Component {
   }
   render() {
     const {login} = this.props;
-    console.log(login);
+
     if(login.payload){
-      return <Redirect to='/' />
+        return window.location = '/';
+      // return <Redirect to='/' />
     }
     return (
       <div className="app flex-row align-items-center">

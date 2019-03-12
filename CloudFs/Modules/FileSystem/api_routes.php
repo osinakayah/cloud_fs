@@ -12,4 +12,5 @@ Route::group(['prefix' => 'file'], function (){
     Route::post('/delete', '\CloudFs\Modules\FileSystem\Controllers\FileSystemController@delete');
     Route::post('/restore', '\CloudFs\Modules\FileSystem\Controllers\FileSystemController@restore');
     Route::post('/download', '\CloudFs\Modules\FileSystem\Controllers\FileSystemController@download');
+    Route::patch('/document', '\CloudFs\Modules\FileSystem\Controllers\FileSystemController@rename');
 });

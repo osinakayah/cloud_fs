@@ -73,4 +73,13 @@ class FileSystemController extends Controller
             return jsend_error('Error '.$exception->getMessage());
         }
     }
+
+    public function rename(Request $request) {
+        try {
+            return jsend_success($this->fileSystemRepo->renameFile($request->get('oldPath'), $request->get('newName')));
+        }
+        catch (\Exception $exception) {
+            return jsend_error('Error '.$exception->getMessage());
+        }
+    }
 }

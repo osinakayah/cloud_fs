@@ -81,4 +81,17 @@ class FileSystemRepo extends FileSystemAbstract
         return $this->fileDisk->url($filePath);
     }
 
+    function renameFile(string $path, string $newFileName)
+    {
+        $stringPathsAsArray = explode(DIRECTORY_SEPARATOR, $path);
+        $arrayLength = count($stringPathsAsArray);
+        $oldName = $stringPathsAsArray[$arrayLength - 1];
+        $extention = substr($oldName, strpos($oldName, '.')) ;
+        $stringPathsAsArray[$arrayLength - 1] = $newFileName.$extention;
+
+        $newPath = implode(DIRECTORY_SEPARATOR, $stringPathsAsArray);
+
+        return $this->fileDisk->move($path, $newPath);
+    }
+
 }

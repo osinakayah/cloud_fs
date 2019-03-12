@@ -10,6 +10,10 @@ const { Types, Creators } = createActions({
     dashboardDeleteDocumentsSuccess: null,
     dashboardDeleteDocumentsFailure: null,
 
+    dashboardRenameDocumentsRequest: ['directory', 'newDirectory'],
+    dashboardRenameDocumentsSuccess: null,
+    dashboardRenameDocumentsFailure: null,
+
     dashboardRestoreDocumentsRequest: ['directory'],
     dashboardRestoreDocumentsSuccess: null,
     dashboardRestoreDocumentsFailure: null,
@@ -35,6 +39,11 @@ export const dashboardDeleteDocumentsRequest = (state) => state.merge({fetching:
 export const dashboardDeleteDocumentsSuccess = state => state.merge({fetching: false});
 export const dashboardDeleteDocumentsFailure = state => state.merge({fetching: false});
 
+
+export const dashboardRenameDocumentsRequest = (state) => state.merge({fetching: true})
+export const dashboardRenameDocumentsSuccess = state => state.merge({fetching: false});
+export const dashboardRenameDocumentsFailure = state => state.merge({fetching: false});
+
 export const dashboardRestoreDocumentsRequest = (state) => state.merge({fetching: true})
 export const dashboardRestoreDocumentsSuccess = state => state.merge({fetching: false});
 export const dashboardRestoreDocumentsFailure = state => state.merge({fetching: false});
@@ -51,6 +60,10 @@ export const reducer = createReducer(INITIAL_STATE, {
     [Types.DASHBOARD_DELETE_DOCUMENTS_FAILURE]: dashboardDeleteDocumentsFailure,
     [Types.DASHBOARD_DELETE_DOCUMENTS_SUCCESS]: dashboardDeleteDocumentsSuccess,
     [Types.DASHBOARD_DELETE_DOCUMENTS_REQUEST]: dashboardDeleteDocumentsRequest,
+
+    [Types.DASHBOARD_RENAME_DOCUMENTS_FAILURE]: dashboardRenameDocumentsFailure,
+    [Types.DASHBOARD_RENAME_DOCUMENTS_SUCCESS]: dashboardRenameDocumentsSuccess,
+    [Types.DASHBOARD_RENAME_DOCUMENTS_REQUEST]: dashboardRenameDocumentsRequest,
 
     [Types.DASHBOARD_RESTORE_DOCUMENTS_FAILURE]: dashboardRestoreDocumentsFailure,
     [Types.DASHBOARD_RESTORE_DOCUMENTS_SUCCESS]: dashboardRestoreDocumentsSuccess,

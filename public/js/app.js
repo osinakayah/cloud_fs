@@ -9479,6 +9479,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "dashboardDeleteDocumentsRequest", function() { return dashboardDeleteDocumentsRequest; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "dashboardDeleteDocumentsSuccess", function() { return dashboardDeleteDocumentsSuccess; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "dashboardDeleteDocumentsFailure", function() { return dashboardDeleteDocumentsFailure; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "dashboardRenameDocumentsRequest", function() { return dashboardRenameDocumentsRequest; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "dashboardRenameDocumentsSuccess", function() { return dashboardRenameDocumentsSuccess; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "dashboardRenameDocumentsFailure", function() { return dashboardRenameDocumentsFailure; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "dashboardRestoreDocumentsRequest", function() { return dashboardRestoreDocumentsRequest; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "dashboardRestoreDocumentsSuccess", function() { return dashboardRestoreDocumentsSuccess; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "dashboardRestoreDocumentsFailure", function() { return dashboardRestoreDocumentsFailure; });
@@ -9503,6 +9506,10 @@ var _createActions = Object(__WEBPACK_IMPORTED_MODULE_0_reduxsauce__["createActi
     dashboardDeleteDocumentsRequest: ['directory'],
     dashboardDeleteDocumentsSuccess: null,
     dashboardDeleteDocumentsFailure: null,
+
+    dashboardRenameDocumentsRequest: ['directory', 'newDirectory'],
+    dashboardRenameDocumentsSuccess: null,
+    dashboardRenameDocumentsFailure: null,
 
     dashboardRestoreDocumentsRequest: ['directory'],
     dashboardRestoreDocumentsSuccess: null,
@@ -9543,6 +9550,16 @@ var dashboardDeleteDocumentsFailure = function dashboardDeleteDocumentsFailure(s
     return state.merge({ fetching: false });
 };
 
+var dashboardRenameDocumentsRequest = function dashboardRenameDocumentsRequest(state) {
+    return state.merge({ fetching: true });
+};
+var dashboardRenameDocumentsSuccess = function dashboardRenameDocumentsSuccess(state) {
+    return state.merge({ fetching: false });
+};
+var dashboardRenameDocumentsFailure = function dashboardRenameDocumentsFailure(state) {
+    return state.merge({ fetching: false });
+};
+
 var dashboardRestoreDocumentsRequest = function dashboardRestoreDocumentsRequest(state) {
     return state.merge({ fetching: true });
 };
@@ -9559,7 +9576,7 @@ var dashboardDownloadDocumentsRequest = function dashboardDownloadDocumentsReque
 
 /* ------------- Hookup Reducers To Types ------------- */
 
-var reducer = Object(__WEBPACK_IMPORTED_MODULE_0_reduxsauce__["createReducer"])(INITIAL_STATE, (_createReducer = {}, _defineProperty(_createReducer, Types.DASHBOARD_DOCUMENTS_REQUEST, dashboardDocumentsRequest), _defineProperty(_createReducer, Types.DASHBOARD_DOCUMENTS_SUCCESS, dashboardDocumentsSuccess), _defineProperty(_createReducer, Types.DASHBOARD_DOCUMENTS_FAILURE, dashboardDocumentsFailure), _defineProperty(_createReducer, Types.DASHBOARD_DELETE_DOCUMENTS_FAILURE, dashboardDeleteDocumentsFailure), _defineProperty(_createReducer, Types.DASHBOARD_DELETE_DOCUMENTS_SUCCESS, dashboardDeleteDocumentsSuccess), _defineProperty(_createReducer, Types.DASHBOARD_DELETE_DOCUMENTS_REQUEST, dashboardDeleteDocumentsRequest), _defineProperty(_createReducer, Types.DASHBOARD_RESTORE_DOCUMENTS_FAILURE, dashboardRestoreDocumentsFailure), _defineProperty(_createReducer, Types.DASHBOARD_RESTORE_DOCUMENTS_SUCCESS, dashboardRestoreDocumentsSuccess), _defineProperty(_createReducer, Types.DASHBOARD_RESTORE_DOCUMENTS_REQUEST, dashboardRestoreDocumentsRequest), _defineProperty(_createReducer, Types.DASHBOARD_DOWNLOAD_DOCUMENTS_REQUEST, dashboardDownloadDocumentsRequest), _createReducer));
+var reducer = Object(__WEBPACK_IMPORTED_MODULE_0_reduxsauce__["createReducer"])(INITIAL_STATE, (_createReducer = {}, _defineProperty(_createReducer, Types.DASHBOARD_DOCUMENTS_REQUEST, dashboardDocumentsRequest), _defineProperty(_createReducer, Types.DASHBOARD_DOCUMENTS_SUCCESS, dashboardDocumentsSuccess), _defineProperty(_createReducer, Types.DASHBOARD_DOCUMENTS_FAILURE, dashboardDocumentsFailure), _defineProperty(_createReducer, Types.DASHBOARD_DELETE_DOCUMENTS_FAILURE, dashboardDeleteDocumentsFailure), _defineProperty(_createReducer, Types.DASHBOARD_DELETE_DOCUMENTS_SUCCESS, dashboardDeleteDocumentsSuccess), _defineProperty(_createReducer, Types.DASHBOARD_DELETE_DOCUMENTS_REQUEST, dashboardDeleteDocumentsRequest), _defineProperty(_createReducer, Types.DASHBOARD_RENAME_DOCUMENTS_FAILURE, dashboardRenameDocumentsFailure), _defineProperty(_createReducer, Types.DASHBOARD_RENAME_DOCUMENTS_SUCCESS, dashboardRenameDocumentsSuccess), _defineProperty(_createReducer, Types.DASHBOARD_RENAME_DOCUMENTS_REQUEST, dashboardRenameDocumentsRequest), _defineProperty(_createReducer, Types.DASHBOARD_RESTORE_DOCUMENTS_FAILURE, dashboardRestoreDocumentsFailure), _defineProperty(_createReducer, Types.DASHBOARD_RESTORE_DOCUMENTS_SUCCESS, dashboardRestoreDocumentsSuccess), _defineProperty(_createReducer, Types.DASHBOARD_RESTORE_DOCUMENTS_REQUEST, dashboardRestoreDocumentsRequest), _defineProperty(_createReducer, Types.DASHBOARD_DOWNLOAD_DOCUMENTS_REQUEST, dashboardDownloadDocumentsRequest), _createReducer));
 
 /***/ }),
 /* 32 */
@@ -16495,8 +16512,9 @@ var BASE_URL = 'http://localhost:8000';
 "use strict";
 /* harmony export (immutable) */ __webpack_exports__["c"] = getDocuments;
 /* harmony export (immutable) */ __webpack_exports__["a"] = deleteDocument;
-/* harmony export (immutable) */ __webpack_exports__["d"] = restoreFileFolder;
+/* harmony export (immutable) */ __webpack_exports__["e"] = restoreFileFolder;
 /* harmony export (immutable) */ __webpack_exports__["b"] = downloandFile;
+/* harmony export (immutable) */ __webpack_exports__["d"] = renameDocument;
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_apisauce__ = __webpack_require__(112);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_apisauce___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_apisauce__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__config__ = __webpack_require__(120);
@@ -16532,6 +16550,12 @@ function restoreFileFolder(directory) {
 function downloandFile(directory) {
     if (directory) {
         return api.post('/download', { directory: directory });
+    }
+}
+
+function renameDocument(oldPath, newName) {
+    if (oldPath, newName) {
+        return api.patch('/document', { oldPath: oldPath, newName: newName });
     }
 }
 
@@ -70286,7 +70310,7 @@ function root() {
             switch (_context.prev = _context.next) {
                 case 0:
                     _context.next = 2;
-                    return Object(__WEBPACK_IMPORTED_MODULE_1_redux_saga_effects__["a" /* all */])([Object(__WEBPACK_IMPORTED_MODULE_1_redux_saga_effects__["d" /* takeLatest */])(__WEBPACK_IMPORTED_MODULE_2__redux_loginRedux__["loginTypes"].LOGIN_REQUEST, __WEBPACK_IMPORTED_MODULE_5__loginSaga__["a" /* login */]), Object(__WEBPACK_IMPORTED_MODULE_1_redux_saga_effects__["d" /* takeLatest */])(__WEBPACK_IMPORTED_MODULE_3__redux_dashboardRedux__["dashboardTypes"].DASHBOARD_DOCUMENTS_REQUEST, __WEBPACK_IMPORTED_MODULE_6__dashboardSaga__["c" /* getFiles */]), Object(__WEBPACK_IMPORTED_MODULE_1_redux_saga_effects__["d" /* takeLatest */])(__WEBPACK_IMPORTED_MODULE_3__redux_dashboardRedux__["dashboardTypes"].DASHBOARD_DELETE_DOCUMENTS_REQUEST, __WEBPACK_IMPORTED_MODULE_6__dashboardSaga__["a" /* deleteDocumentSaga */]), Object(__WEBPACK_IMPORTED_MODULE_1_redux_saga_effects__["d" /* takeLatest */])(__WEBPACK_IMPORTED_MODULE_4__redux_registrationRedux__["registrationTypes"].REGISTRATION_REQUEST, __WEBPACK_IMPORTED_MODULE_7__registerSaga__["a" /* registerSaga */]), Object(__WEBPACK_IMPORTED_MODULE_1_redux_saga_effects__["d" /* takeLatest */])(__WEBPACK_IMPORTED_MODULE_3__redux_dashboardRedux__["dashboardTypes"].DASHBOARD_RESTORE_DOCUMENTS_REQUEST, __WEBPACK_IMPORTED_MODULE_6__dashboardSaga__["d" /* restoreFileFolderSaga */]), Object(__WEBPACK_IMPORTED_MODULE_1_redux_saga_effects__["d" /* takeLatest */])(__WEBPACK_IMPORTED_MODULE_3__redux_dashboardRedux__["dashboardTypes"].DASHBOARD_DOWNLOAD_DOCUMENTS_REQUEST, __WEBPACK_IMPORTED_MODULE_6__dashboardSaga__["b" /* downloadDocumentSaga */])]);
+                    return Object(__WEBPACK_IMPORTED_MODULE_1_redux_saga_effects__["a" /* all */])([Object(__WEBPACK_IMPORTED_MODULE_1_redux_saga_effects__["d" /* takeLatest */])(__WEBPACK_IMPORTED_MODULE_2__redux_loginRedux__["loginTypes"].LOGIN_REQUEST, __WEBPACK_IMPORTED_MODULE_5__loginSaga__["a" /* login */]), Object(__WEBPACK_IMPORTED_MODULE_1_redux_saga_effects__["d" /* takeLatest */])(__WEBPACK_IMPORTED_MODULE_3__redux_dashboardRedux__["dashboardTypes"].DASHBOARD_DOCUMENTS_REQUEST, __WEBPACK_IMPORTED_MODULE_6__dashboardSaga__["c" /* getFiles */]), Object(__WEBPACK_IMPORTED_MODULE_1_redux_saga_effects__["d" /* takeLatest */])(__WEBPACK_IMPORTED_MODULE_3__redux_dashboardRedux__["dashboardTypes"].DASHBOARD_DELETE_DOCUMENTS_REQUEST, __WEBPACK_IMPORTED_MODULE_6__dashboardSaga__["a" /* deleteDocumentSaga */]), Object(__WEBPACK_IMPORTED_MODULE_1_redux_saga_effects__["d" /* takeLatest */])(__WEBPACK_IMPORTED_MODULE_4__redux_registrationRedux__["registrationTypes"].REGISTRATION_REQUEST, __WEBPACK_IMPORTED_MODULE_7__registerSaga__["a" /* registerSaga */]), Object(__WEBPACK_IMPORTED_MODULE_1_redux_saga_effects__["d" /* takeLatest */])(__WEBPACK_IMPORTED_MODULE_3__redux_dashboardRedux__["dashboardTypes"].DASHBOARD_RESTORE_DOCUMENTS_REQUEST, __WEBPACK_IMPORTED_MODULE_6__dashboardSaga__["e" /* restoreFileFolderSaga */]), Object(__WEBPACK_IMPORTED_MODULE_1_redux_saga_effects__["d" /* takeLatest */])(__WEBPACK_IMPORTED_MODULE_3__redux_dashboardRedux__["dashboardTypes"].DASHBOARD_DOWNLOAD_DOCUMENTS_REQUEST, __WEBPACK_IMPORTED_MODULE_6__dashboardSaga__["b" /* downloadDocumentSaga */]), Object(__WEBPACK_IMPORTED_MODULE_1_redux_saga_effects__["d" /* takeLatest */])(__WEBPACK_IMPORTED_MODULE_3__redux_dashboardRedux__["dashboardTypes"].DASHBOARD_RENAME_DOCUMENTS_REQUEST, __WEBPACK_IMPORTED_MODULE_6__dashboardSaga__["d" /* renameDocumentSaga */])]);
 
                 case 2:
                 case "end":
@@ -73937,8 +73961,9 @@ module.exports = function spread(callback) {
 "use strict";
 /* harmony export (immutable) */ __webpack_exports__["c"] = getFiles;
 /* harmony export (immutable) */ __webpack_exports__["a"] = deleteDocumentSaga;
-/* harmony export (immutable) */ __webpack_exports__["d"] = restoreFileFolderSaga;
+/* harmony export (immutable) */ __webpack_exports__["e"] = restoreFileFolderSaga;
 /* harmony export (immutable) */ __webpack_exports__["b"] = downloadDocumentSaga;
+/* harmony export (immutable) */ __webpack_exports__["d"] = renameDocumentSaga;
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__ = __webpack_require__(37);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_redux_saga_effects__ = __webpack_require__(28);
@@ -73951,7 +73976,8 @@ module.exports = function spread(callback) {
 var _marked = /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(getFiles),
     _marked2 = /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(deleteDocumentSaga),
     _marked3 = /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(restoreFileFolderSaga),
-    _marked4 = /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(downloadDocumentSaga);
+    _marked4 = /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(downloadDocumentSaga),
+    _marked5 = /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(renameDocumentSaga);
 
 
 
@@ -73966,36 +73992,38 @@ function getFiles(action) {
             switch (_context.prev = _context.next) {
                 case 0:
                     directory = action.directory;
+
+                    console.log(directory);
                     user = __WEBPACK_IMPORTED_MODULE_3_reactjs_localstorage__["reactLocalStorage"].getObject('user_token', {});
 
                     if (!user.token) {
-                        _context.next = 13;
+                        _context.next = 14;
                         break;
                     }
 
-                    _context.next = 5;
+                    _context.next = 6;
                     return Object(__WEBPACK_IMPORTED_MODULE_1_redux_saga_effects__["b" /* call */])(__WEBPACK_IMPORTED_MODULE_4__services_dashboardService__["c" /* getDocuments */], directory);
 
-                case 5:
+                case 6:
                     documentResponse = _context.sent;
 
                     if (!documentResponse.ok) {
-                        _context.next = 11;
+                        _context.next = 12;
                         break;
                     }
 
-                    _context.next = 9;
+                    _context.next = 10;
                     return Object(__WEBPACK_IMPORTED_MODULE_1_redux_saga_effects__["c" /* put */])(__WEBPACK_IMPORTED_MODULE_2__redux_dashboardRedux__["default"].dashboardDocumentsSuccess(documentResponse.data.data));
 
-                case 9:
-                    _context.next = 13;
+                case 10:
+                    _context.next = 14;
                     break;
 
-                case 11:
-                    _context.next = 13;
+                case 12:
+                    _context.next = 14;
                     return Object(__WEBPACK_IMPORTED_MODULE_1_redux_saga_effects__["c" /* put */])(__WEBPACK_IMPORTED_MODULE_2__redux_dashboardRedux__["default"].dashboardDocumentsFailure());
 
-                case 13:
+                case 14:
                 case 'end':
                     return _context.stop();
             }
@@ -74070,7 +74098,7 @@ function restoreFileFolderSaga(action) {
                     }
 
                     _context3.next = 6;
-                    return Object(__WEBPACK_IMPORTED_MODULE_1_redux_saga_effects__["b" /* call */])(__WEBPACK_IMPORTED_MODULE_4__services_dashboardService__["d" /* restoreFileFolder */], directory);
+                    return Object(__WEBPACK_IMPORTED_MODULE_1_redux_saga_effects__["b" /* call */])(__WEBPACK_IMPORTED_MODULE_4__services_dashboardService__["e" /* restoreFileFolder */], directory);
 
                 case 6:
                     documentRestoreDocumentResponse = _context3.sent;
@@ -74112,46 +74140,89 @@ function downloadDocumentSaga(action) {
         while (1) {
             switch (_context4.prev = _context4.next) {
                 case 0:
-                    console.log(action);
                     path = action.path;
                     user = __WEBPACK_IMPORTED_MODULE_3_reactjs_localstorage__["reactLocalStorage"].getObject('user_token', {});
 
                     if (!user.token) {
-                        _context4.next = 17;
+                        _context4.next = 16;
                         break;
                     }
 
-                    _context4.next = 6;
+                    _context4.next = 5;
                     return Object(__WEBPACK_IMPORTED_MODULE_1_redux_saga_effects__["b" /* call */])(__WEBPACK_IMPORTED_MODULE_4__services_dashboardService__["b" /* downloandFile */], path);
 
-                case 6:
+                case 5:
                     documentDownloadDocumentResponse = _context4.sent;
 
                     if (!documentDownloadDocumentResponse.ok) {
-                        _context4.next = 14;
+                        _context4.next = 13;
                         break;
                     }
 
                     window.location = documentDownloadDocumentResponse.data.data;
                     alert('Download started');
-                    _context4.next = 12;
+                    _context4.next = 11;
                     return Object(__WEBPACK_IMPORTED_MODULE_1_redux_saga_effects__["c" /* put */])(__WEBPACK_IMPORTED_MODULE_2__redux_dashboardRedux__["default"].dashboardDocumentsRequest('/'));
 
-                case 12:
-                    _context4.next = 17;
+                case 11:
+                    _context4.next = 16;
                     break;
 
-                case 14:
+                case 13:
                     alert('Oops, an error occured');
-                    _context4.next = 17;
+                    _context4.next = 16;
                     return Object(__WEBPACK_IMPORTED_MODULE_1_redux_saga_effects__["c" /* put */])(__WEBPACK_IMPORTED_MODULE_2__redux_dashboardRedux__["default"].dashboardDeleteDocumentsFailure());
 
-                case 17:
+                case 16:
                 case 'end':
                     return _context4.stop();
             }
         }
     }, _marked4, this);
+}
+
+function renameDocumentSaga(action) {
+    var directory, newDirectory, user, renameDocumentResponse;
+    return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function renameDocumentSaga$(_context5) {
+        while (1) {
+            switch (_context5.prev = _context5.next) {
+                case 0:
+                    directory = action.directory, newDirectory = action.newDirectory;
+                    user = __WEBPACK_IMPORTED_MODULE_3_reactjs_localstorage__["reactLocalStorage"].getObject('user_token', {});
+
+                    if (!user.token) {
+                        _context5.next = 13;
+                        break;
+                    }
+
+                    _context5.next = 5;
+                    return Object(__WEBPACK_IMPORTED_MODULE_1_redux_saga_effects__["b" /* call */])(__WEBPACK_IMPORTED_MODULE_4__services_dashboardService__["d" /* renameDocument */], directory, newDirectory);
+
+                case 5:
+                    renameDocumentResponse = _context5.sent;
+
+                    if (!renameDocumentResponse.ok) {
+                        _context5.next = 12;
+                        break;
+                    }
+
+                    alert('Document renamed successfully');
+                    _context5.next = 10;
+                    return Object(__WEBPACK_IMPORTED_MODULE_1_redux_saga_effects__["c" /* put */])(__WEBPACK_IMPORTED_MODULE_2__redux_dashboardRedux__["default"].dashboardDocumentsRequest('/'));
+
+                case 10:
+                    _context5.next = 13;
+                    break;
+
+                case 12:
+                    alert('Unable to rename document');
+
+                case 13:
+                case 'end':
+                    return _context5.stop();
+            }
+        }
+    }, _marked5, this);
 }
 
 /***/ }),
@@ -81779,7 +81850,12 @@ var Dashboard = function (_Component) {
 
         _this.state = {
             deleteModalState: false,
-            fileToDelete: null
+            fileToDelete: null,
+
+            renameModalState: false,
+            fileToRename: null,
+
+            newDocName: ''
         };
         _this.toggleDeleteModal = _this.toggleDeleteModal.bind(_this);
         _this.openFolder = _this.openFolder.bind(_this);
@@ -81805,6 +81881,12 @@ var Dashboard = function (_Component) {
         value: function getDirectoryOrFileName(absolutePath) {
             var pathSections = absolutePath.split("/");
             return pathSections[pathSections.length - 1];
+        }
+    }, {
+        key: 'toggleRenameModal',
+        value: function toggleRenameModal(absolutePath) {
+            absolutePath = absolutePath || null;
+            this.setState({ renameModalState: !this.state.renameModalState, fileToRename: absolutePath });
         }
     }, {
         key: 'toggleDeleteModal',
@@ -81837,11 +81919,11 @@ var Dashboard = function (_Component) {
                     return _this2.isFolder(file) ? __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                         __WEBPACK_IMPORTED_MODULE_1_reactstrap__["g" /* Col */],
                         { key: index, xs: '12', sm: '6', lg: '3' },
-                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2__components_Widgets_Widget02__["a" /* default */], { key: index + 'fo', link: file, openFolder: _this2.openFolder, header: '', mainText: _this2.getDirectoryOrFileName(file), icon: 'fa fa-folder', color: 'info' })
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2__components_Widgets_Widget02__["a" /* default */], { key: index + 'fo', link: file, toggleRenameModal: _this2.toggleRenameModal.bind(_this2), openFolder: _this2.openFolder, header: '', mainText: _this2.getDirectoryOrFileName(file), icon: 'fa fa-folder', color: 'info' })
                     ) : __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                         __WEBPACK_IMPORTED_MODULE_1_reactstrap__["g" /* Col */],
                         { key: index, xs: '12', sm: '6', lg: '3' },
-                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2__components_Widgets_Widget02__["a" /* default */], { downloadFile: _this2.downloadFile, footer: true, toggleDeleteModal: _this2.toggleDeleteModal, link: file, key: index + 'fi', header: '', mainText: _this2.getDirectoryOrFileName(file), icon: 'fa fa-file', color: 'primary' })
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2__components_Widgets_Widget02__["a" /* default */], { downloadFile: _this2.downloadFile, footer: true, toggleRenameModal: _this2.toggleRenameModal.bind(_this2), toggleDeleteModal: _this2.toggleDeleteModal, link: file, key: index + 'fi', header: '', mainText: _this2.getDirectoryOrFileName(file), icon: 'fa fa-file', color: 'primary' })
                     );
                 });
             }
@@ -81880,6 +81962,54 @@ var Dashboard = function (_Component) {
                     )
                 ),
                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                    __WEBPACK_IMPORTED_MODULE_1_reactstrap__["o" /* Modal */],
+                    { isOpen: this.state.renameModalState },
+                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                        __WEBPACK_IMPORTED_MODULE_1_reactstrap__["r" /* ModalHeader */],
+                        { toggle: this.toggleRenameModal.bind(this) },
+                        'Rename file'
+                    ),
+                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                        __WEBPACK_IMPORTED_MODULE_1_reactstrap__["p" /* ModalBody */],
+                        null,
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                            __WEBPACK_IMPORTED_MODULE_1_reactstrap__["n" /* InputGroup */],
+                            { className: 'mb-4' },
+                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                'div',
+                                { className: 'input-group-prepend' },
+                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                    'span',
+                                    { className: 'input-group-text' },
+                                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('i', { className: 'icon-create' })
+                                )
+                            ),
+                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1_reactstrap__["m" /* Input */], { onChange: function onChange(event) {
+                                    _this2.setState({ newDocName: event.target.value });
+                                }, type: 'text', value: this.state.newDocName })
+                        )
+                    ),
+                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                        __WEBPACK_IMPORTED_MODULE_1_reactstrap__["q" /* ModalFooter */],
+                        null,
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                            __WEBPACK_IMPORTED_MODULE_1_reactstrap__["b" /* Button */],
+                            { color: 'primary', onClick: function onClick() {
+                                    return _this2.props.renameDocument(_this2.state.fileToRename, _this2.state.newDocName);
+                                } },
+                            'Save'
+                        ),
+                        ' ',
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                            __WEBPACK_IMPORTED_MODULE_1_reactstrap__["b" /* Button */],
+                            { color: 'secondary', onClick: function onClick() {
+                                    return _this2.toggleRenameModal();
+                                } },
+                            'Cancel'
+                        )
+                    )
+                ),
+                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                     'center',
                     null,
                     __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_5_react_spinners__["RingLoader"], { loading: this.props.dashboard.fetching })
@@ -81912,6 +82042,9 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
         },
         downloadFile: function downloadFile(path) {
             return dispatch(__WEBPACK_IMPORTED_MODULE_4__redux_dashboardRedux__["default"].dashboardDownloadDocumentsRequest(path));
+        },
+        renameDocument: function renameDocument(directory, newDirectory) {
+            return dispatch(__WEBPACK_IMPORTED_MODULE_4__redux_dashboardRedux__["default"].dashboardRenameDocumentsRequest(directory, newDirectory));
         }
     };
 };
@@ -81985,6 +82118,7 @@ var Widget02 = function (_Component) {
     key: 'render',
     value: function render() {
       var _props = this.props,
+          toggleRenameModal = _props.toggleRenameModal,
           downloadFile = _props.downloadFile,
           openFolder = _props.openFolder,
           toggleDeleteModal = _props.toggleDeleteModal,
@@ -81998,7 +82132,7 @@ var Widget02 = function (_Component) {
           link = _props.link,
           children = _props.children,
           variant = _props.variant,
-          attributes = _objectWithoutProperties(_props, ['downloadFile', 'openFolder', 'toggleDeleteModal', 'className', 'cssModule', 'header', 'mainText', 'icon', 'color', 'footer', 'link', 'children', 'variant']);
+          attributes = _objectWithoutProperties(_props, ['toggleRenameModal', 'downloadFile', 'openFolder', 'toggleDeleteModal', 'className', 'cssModule', 'header', 'mainText', 'icon', 'color', 'footer', 'link', 'children', 'variant']);
 
       // demo purposes only
 
@@ -82025,6 +82159,14 @@ var Widget02 = function (_Component) {
             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
               __WEBPACK_IMPORTED_MODULE_2_reactstrap__["b" /* Button */],
               { onClick: function onClick() {
+                  toggleRenameModal(link);
+                }, className: 'font-weight-bold font-xs btn-block text-muted' },
+              'Rename',
+              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('i', { className: 'fa fa-pencil float-right font-lg' })
+            ),
+            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+              __WEBPACK_IMPORTED_MODULE_2_reactstrap__["b" /* Button */],
+              { onClick: function onClick() {
                   return downloadFile(link);
                 }, className: 'font-weight-bold font-xs btn-block text-muted' },
               'Download',
@@ -82043,6 +82185,14 @@ var Widget02 = function (_Component) {
           return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
             __WEBPACK_IMPORTED_MODULE_2_reactstrap__["e" /* CardFooter */],
             { className: 'px-3 py-2' },
+            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+              __WEBPACK_IMPORTED_MODULE_2_reactstrap__["b" /* Button */],
+              { onClick: function onClick() {
+                  toggleRenameModal(link);
+                }, className: 'font-weight-bold font-xs btn-block text-muted' },
+              'Rename',
+              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('i', { className: 'fa fa-pencil float-right font-lg' })
+            ),
             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
               __WEBPACK_IMPORTED_MODULE_2_reactstrap__["b" /* Button */],
               { onClick: function onClick() {
@@ -97271,9 +97421,10 @@ var Login = function (_Component) {
 
       var login = this.props.login;
 
-      console.log(login);
+
       if (login.payload) {
-        return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1_react_router_dom__["c" /* Redirect */], { to: '/' });
+        return window.location = '/';
+        // return <Redirect to='/' />
       }
       return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
         'div',

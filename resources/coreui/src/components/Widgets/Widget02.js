@@ -28,7 +28,7 @@ const defaultProps = {
 
 class Widget02 extends Component {
   render() {
-    const {downloadFile, openFolder, toggleDeleteModal, className, cssModule, header, mainText, icon, color, footer, link, children, variant, ...attributes} = this.props;
+    const {toggleRenameModal,  downloadFile, openFolder, toggleDeleteModal, className, cssModule, header, mainText, icon, color, footer, link, children, variant, ...attributes} = this.props;
 
     // demo purposes only
     const padding = (variant === '0' ? {card: "p-3", icon: "p-3", lead: "mt-2"} : ( variant === "1" ? {
@@ -49,6 +49,8 @@ class Widget02 extends Component {
       if (footer) {
         return (
           <CardFooter className="px-3 py-2">
+            <Button onClick={() => {toggleRenameModal(link)}} className="font-weight-bold font-xs btn-block text-muted">Rename
+              <i className="fa fa-pencil float-right font-lg"></i></Button>
             <Button onClick={()=>downloadFile(link)} className="font-weight-bold font-xs btn-block text-muted">Download
               <i className="fa fa-cloud-download float-right font-lg"></i></Button>
             <Button onClick={()=>{toggleDeleteModal(link)}} className="font-weight-bold font-xs btn-block text-muted">Delete
@@ -58,6 +60,8 @@ class Widget02 extends Component {
       }else {
           return (
               <CardFooter className="px-3 py-2">
+                <Button onClick={() => {toggleRenameModal(link)}} className="font-weight-bold font-xs btn-block text-muted">Rename
+                  <i className="fa fa-pencil float-right font-lg"></i></Button>
                 <Button onClick={() => openFolder(link)} className="font-weight-bold font-xs btn-block text-muted">Open Folder
                   <i className="fa fa-folder-open float-right font-lg"></i></Button>
                 <Button onClick={()=>{toggleDeleteModal(link)}} className="font-weight-bold font-xs btn-block text-muted">Delete

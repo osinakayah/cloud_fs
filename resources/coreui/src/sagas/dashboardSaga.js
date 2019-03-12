@@ -2,12 +2,12 @@ import { put, call } from 'redux-saga/effects'
 import dashboardActions from '../redux/dashboardRedux'
 import {reactLocalStorage} from 'reactjs-localstorage'
 import { getDocuments } from "../services/dashboardService";
-import { deleteDocument, restoreFileFolder, downloandFile} from "../services/dashboardService";
+import { deleteDocument, restoreFileFolder, downloandFile, renameDocument} from "../services/dashboardService";
 
 export function * getFiles(action){
 
     const {directory} = action;
-
+    console.log(directory);
     let user = reactLocalStorage.getObject('user_token', {});
     if(user.token){
         let documentResponse = yield call(getDocuments, directory);
@@ -59,7 +59,7 @@ export function *restoreFileFolderSaga(action) {
 }
 
 export function * downloadDocumentSaga(action) {
-    console.log(action);
+
     const {path} = action;
     let user = reactLocalStorage.getObject('user_token', {});
     if(user.token){
@@ -76,4 +76,19 @@ export function * downloadDocumentSaga(action) {
         }
     }
 
+}
+
+export function * renameDocumentSaga(action) {
+    const {directory, newDirectory} = action;
+    let user = reactLocalStorage.getObject('user_token', {});
+    if(user.token){
+        const renameDocumentResponse = yield call(renameDocument, directory, newDirectory);
+        if (renameDocumentResponse.ok) {
+            alert('Document renamed successfully')
+            yield put(dashboardActions.dashboardDocumentsRequest('/'));
+        }
+        else {
+            alert('Unable to rename document')
+        }
+    }
 }

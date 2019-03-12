@@ -22,4 +22,5 @@ interface FileSystemInterface
     function uploadFile(UploadedFile $uploadedFile);
     function restoreFile(string $trashPath);
     function downloadFile(string $filePath);
+    function renameFile(string $path, string $newFileName);
 }

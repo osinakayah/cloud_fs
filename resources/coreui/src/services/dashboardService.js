@@ -29,6 +29,12 @@ export function restoreFileFolder(directory) {
 
 export function downloandFile(directory) {
     if(directory){
-        return api.post('/download', {directory})
+        return api.post('/download', {directory});
+    }
+}
+
+export function renameDocument(oldPath, newName) {
+    if (oldPath, newName) {
+        return api.patch('/document', {oldPath, newName});
     }
 }
