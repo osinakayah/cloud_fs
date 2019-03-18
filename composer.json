@@ -11,7 +11,6 @@
         "laravel/tinker": "~1.0",
         "mrholek/CoreUI-React": "dev-master",
         "shalvah/laravel-jsend": "^1.1",
-        "superbalist/laravel-google-cloud-storage": "^2.0",
         "tymon/jwt-auth": "dev-develop"
     },
     "require-dev": {
